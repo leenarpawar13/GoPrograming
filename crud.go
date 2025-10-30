@@ -109,10 +109,33 @@ func performePutRequest() {
 	fmt.Println("put mrthod", string(data))
 	fmt.Println("status:=", res.Status)
 }
+func performeDeleteRequest() {
+
+	const myurl = "https://jsonplaceholder.typicode.com/todos/1"
+
+	req, err := http.NewRequest(http.MethodDelete, myurl, nil)
+	if err != nil {
+		fmt.Println("error getting get response", err)
+		return
+
+	}
+	client := http.Client{}
+	res, err := client.Do(req)
+	if err != nil {
+		fmt.Println("err", err)
+		return
+
+	}
+	defer res.Body.Close()
+
+	fmt.Println("status:=", res.Status)
+
+}
 
 func main() {
 	fmt.Println("web request program...")
 	//PerformeGetRequest()
 	//PerformePostRequest()
-	performePutRequest()
+	//performePutRequest()
+	performeDeleteRequest()
 }
